@@ -1,4 +1,5 @@
 package com.ugurhmz;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,18 @@ public class LandmarkAdapterRecycler extends RecyclerView.Adapter<LandmarkAdapte
     @Override   //ViewHolder sınıfı bağlandığında neler olacak onun için. Layout içinde hangi verileri gösterceksek
     public void onBindViewHolder(@NonNull LandmarkHolder holder, int position) {
         holder.binding.recyclerViewTextView.setText(landmarkArrayList.get(position).name);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
+//                        intent.putExtra("landmark", landmarkArrayList.get(position));
+
+                        Singleton singleton = Singleton.getInstance();
+                        singleton.setSentLandMark(landmarkArrayList.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
 
